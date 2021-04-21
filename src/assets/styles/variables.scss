@@ -1,0 +1,25 @@
+/* 基础颜色 */
+$blue:#324157;
+$light-blue:#3A71A8;
+$red:#C03639;
+$pink: #E65D6E;
+$green: #30B08F;
+$tiffany: #4AB7BD;
+$yellow:#FEC171;
+$panGreen: #30B08F;
+
+
+/* sidebar 变量 */
+$side-bar-width: 200px;
+$side-bar-hidden-width: 54px;
+
+/* header 变量 */
+$navbar-height: 50px;
+$tags-height: 35px;
+
+/* 动画周期 */
+$transition-period: .28s;
+
+:export{
+  side_bar_width:$side-bar-width;
+}

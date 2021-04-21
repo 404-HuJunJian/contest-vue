@@ -1,0 +1,123 @@
+<template>
+  <el-table
+    :data="tableData"
+    v-loading="loading"
+    border
+    style="width: 100%">
+    <el-table-column
+      label="姓名"
+      width="150"
+      >
+      <template slot-scope="scope">
+        {{ scope.row.name }}
+      </template>
+    </el-table-column>
+    <el-table-column
+      label="部门"
+      width="100"
+      >
+      <template slot-scope="scope">
+        {{scope.row.department}}
+      </template>
+    </el-table-column>
+    <el-table-column
+      label="性别"
+      width="100">
+      <template slot-scope="scope">
+        {{scope.row.gender === 1 ? '男' : '女'}}
+      </template>
+    </el-table-column>
+    <el-table-column
+      label="年龄"
+      width="100"
+      >
+      <template slot-scope="scope">
+        {{ formatBirth(scope.row.birth) }}
+      </template>
+    </el-table-column>
+    <el-table-column
+      label="工龄"
+      width="100"
+      >
+      <template slot-scope="scope">
+        {{scope.row.seniority && scope.row.seniority.toFixed(1) || 0.0}}年
+      </template>
+    </el-table-column>
+    <el-table-column
+      label="学历"
+      width="150"
+      >
+      <template slot-scope="scope">
+        {{formatDegree(scope.row.degree)}}
+      </template>
+    </el-table-column>
+    <el-table-column
+      label="Tel"
+      width="150">
+      <template slot-scope="scope">
+        {{scope.row.tel}}
+      </template>
+    </el-table-column>
+    <el-table-column
+      label="Email"
+      width="200">
+      <template slot-scope="scope">
+        {{scope.row.mail}}
+      </template>
+    </el-table-column>
+    <el-table-column
+      label="操作"
+    >
+      <template slot-scope="scope">
+        <el-button
+          size="mini"
+          @click="handleRoute('/employee/detail/' + scope.row.id)">查看详细信息</el-button>
+        <el-button
+          size="mini"
+          @click="handleRoute('/employee/attendance/' + scope.row.id)">考勤</el-button>
+        <el-button
+          size="mini"
+          @click="handleRoute('/employee/performance/' + scope.row.id)">业绩</el-button>
+        <el-button
+          size="mini"
+        @click="handleRoute('/employee/evaluate/' + scope.row.id)">评价</el-button>
+        <el-button
+          size="mini"
+          @click="handleRoute('/employee/crime/' + scope.row.id)">违纪录入</el-button>
+      </template>
+    </el-table-column>
+  </el-table>
+</template>
+<script>
+import {getEmployeeList} from '@/api/employee'
+import {formatBirth, formatDegree} from '@/utils/info-format'
+
+export default {
+  name: "manager-table",
+  props: {
+    tableData: {
+      type: Array,
+      default: function () {
+        return []
+      }
+    },
+    loading: {
+      type: Boolean,
+      default: true
+    }
+  },
+  methods: {
+    handleRoute(path) {
+      this.$router.push({path: path})
+    },
+    handleCommand(val){
+      this.$router.push({path: val})
+    },
+    formatBirth,formatDegree
+  },
+}
+</script>
+
+<style scoped>
+
+</style>
